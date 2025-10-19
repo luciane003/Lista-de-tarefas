@@ -16,16 +16,16 @@ botaoTema.addEventListener('click', () => {
     container.classList.toggle('tema-escuro')
 
     iconeTema.src = body.classList.contains('tema-escuro')
-    ? './src/imagens/icon-sun.svg'
-    : './src/imagens/icon-moon.svg';
+        ? './src/imagens/icon-sun.svg'
+        : './src/imagens/icon-moon.svg';
 });
 
 input.addEventListener('keydown', (event) => {
     //Aqui vai o que acontece quando uma tecla é pressionada
     if (event.key === 'Enter') {
-        if(input.value.trim() === '') return;
+        if (input.value.trim() === '') return;
 
-        if(tarefas.length >=8) {
+        if (tarefas.length >= 8) {
             mensagemAlerta.style.display = 'block';
             return; //Não adiciona mais
         }
@@ -44,33 +44,72 @@ input.addEventListener('keydown', (event) => {
 function atualizarLista() {
     listaTarefas.innerHTML = '';//limpa a lista antes de recriar
 
-    tarefas.forEach((tarefa) => {
+    tarefas.forEach((tarefa, index) => {
         //Aqui dentro, criamos um <li> para cada tarefa
         const li = document.createElement('li');
-        li.textContent = tarefa.texto;
 
+        //Span com o texto da tarefa
+        const textoTarefa = document.createElement('span');
+        textoTarefa.textContent = tarefa.texto;
+        textoTarefa.style.cursor = 'pointer';
+        if(tarefa.feito) textoTarefa.classList.add('feito');
 
-        li.addEventListener('click', () => {
-            //Aqui vai o que acontece quando a pessoa clica na tarefa
-            tarefa.feito = !tarefa.feito;
+        //Menu de três pontinhos
+        const menu = document.createElement('span');
+        menu.textContent = '⋮';
+        menu.style.float = 'right';
+        menu.style.cursor = 'pointer';
+
+        //Opção de excluir
+        const excluir = document.createElement('span');
+        excluir.textContent = 'Excluir';
+        excluir.style.display = 'none';
+        excluir.style.marginLeft = '5px';
+        excluir.style.color = 'red';
+        excluir.style.cursor = 'pointer';
+
+        //Adiciona tudo no li
+        li.appendChild(textoTarefa);
+        li.appendChild(menu);
+        li.appendChild(excluir);
+
+        //li marcar e desmarcar
+        li.addEventListener('click', (e) => {
+            if (e.target !== menu && e.target !== excluir) {
+                tarefa.feito = !tarefa.feito;
+                atualizarLista();
+            }
+        });
+
+        //Mostrar/ocultar opção excluir 
+        menu.addEventListener('click', (e) => {
+            e.stopPropagation(); // para não disparar clique no li
+            excluir.style.display = excluir.style.display === 'none' ? 'inline' : 'none';
+        });
+
+        //Ação de excluir 
+        excluir.addEventListener('click', (e) => {
+            e.stopPropagation();
+            tarefas.splice(index, 1); //remove do array
             atualizarLista();
         });
 
-        if (tarefa.feito) li.classList.add('feito');
         listaTarefas.appendChild(li);
     });
 
     atualizarContador();
+
+    mensagemAlerta.style.display = tarefas.length >= 8 ? 'block' : 'none';
 }
 
-function atualizarContador () {
+function atualizarContador() {
     const total = tarefas.length;// total de tarefas
     const feitas = tarefas.filter(tarefa => tarefa.feito).length;//tarefas feitas
     contador.textContent = `${total} itens | Feitas: ${feitas}`
 }
 
-btnLimpar.addEventListener('click', () =>{
-    tarefas.length = '';
-   atualizarLista();
-   mensagemAlerta.style.display = 'none';
+btnLimpar.addEventListener('click', () => {
+    tarefas.length = 0;
+    atualizarLista();
+    mensagemAlerta.style.display = 'none';
 });    
