@@ -52,6 +52,7 @@ function atualizarLista() {
         const textoTarefa = document.createElement('span');
         textoTarefa.textContent = tarefa.texto;
         textoTarefa.style.cursor = 'pointer';
+        textoTarefa.classList.add('texto-tarefa');
         if(tarefa.feito) textoTarefa.classList.add('feito');
 
         //Menu de três pontinhos
@@ -67,6 +68,7 @@ function atualizarLista() {
         excluir.style.marginLeft = '5px';
         excluir.style.color = 'red';
         excluir.style.cursor = 'pointer';
+        excluir.classList.add('excluir-item');
 
         //Adiciona tudo no li
         li.appendChild(textoTarefa);

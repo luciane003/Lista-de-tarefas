@@ -144,9 +144,17 @@ ul li:hover {
 
 }
 
+.texto-tarefa {
+    font-size: 0.68rem;
+}
+
 .feito {
     text-decoration: line-through;
     opacity: 0.6;
+}
+
+.excluir-item{
+    font-size: 0.68rem;
 }
 
 .mensagem-alerta {
