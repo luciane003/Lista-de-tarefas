@@ -7,7 +7,7 @@ Este é um aplicativo de lista de tarefas que permite organizar suas atividades 
 O maior desafio deste projeto foi adicionar itens dinamicamente na lista (<ul>) via JavaScript. Achei incrível perceber como o JS manipula o DOM, permitindo criar elementos que não existiam no HTML inicialmente. Esse exercício foi excelente para praticar e entender melhor o poder do JavaScript em projetos práticos.
 
 ## Projeto no ar
-Acesse (aqui.[https://luciane003.github.io/Lista-de-tarefas/])
+Acesse a versão online do [projeto.](https://luciane003.github.io/Lista-de-tarefas/)
 
 ## Funcionalidades
 - Código limpo e organizado
