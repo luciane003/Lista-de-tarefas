@@ -31,6 +31,7 @@ git clone https://github.com/luciane003/Lista-de-tarefas.git
 ### Abra o arquivo index.html no navegador
 
 ## Visualização
+![Lista de tarefas](./src/visualizacao/visu-lista-tarefas.gif)
 
 ## Autora 
 -  Luciane Kellen
